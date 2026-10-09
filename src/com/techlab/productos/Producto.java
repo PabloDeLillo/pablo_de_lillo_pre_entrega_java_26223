@@ -5,7 +5,7 @@
  * Clase base de los productos. Centralizo los datos comunes y valido los cambios para evitar precios o stocks incorrectos.
  */
 package com.techlab.productos;
-public abstract class Producto implements Descontable {
+public abstract class Producto implements Descontable, com.techlab.interfaces.Identificable {
  // El contador es compartido por todos los productos y me ayuda a asignar IDs.
  private static int contadorProductos=0; private final int id; private String nombre; private double precio; private int stock; private Categoria categoria;
  protected Producto(String nombre,double precio,int stock,Categoria categoria){setNombre(nombre);setPrecio(precio);setStock(stock);setCategoria(categoria);this.id=++contadorProductos;}

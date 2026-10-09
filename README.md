@@ -1,13 +1,14 @@
-# TechLab - Preentrega Java
+# TechLab - Gestión de productos, categorías y pedidos
 
-**Desarrollador:** Pablo De Lillo  
-**Lenguaje:** Java (JDK 17 o superior)
+**Desarrollador:** Pablo De Lillo
 
-Este es mi proyecto de preentrega para gestionar productos y pedidos desde la consola. Lo organicé en clases y paquetes para aplicar lo visto en las clases. Los comentarios del código explican las decisiones principales sin repetir lo que ya se entiende al leer Java.
+Aplicación de consola en Java con programación orientada a objetos. Incluye CRUD de categorías, alta/búsqueda/edición/baja de productos, pedidos con validación de stock acumulado, interfaces `Identificable` y `Calculable`, repositorio genérico en memoria, menús independientes y utilidades `Validaciones` y `Secuencias`.
 
-## Ejecución
+## Requisitos
+Java JDK 17 o superior. No requiere librerías externas ni base de datos. Los datos se mantienen en memoria mientras se ejecuta.
 
-Desde la raíz del repositorio (Linux/macOS):
+## Compilar y ejecutar
+Desde la carpeta `TechLab`:
 
 ```bash
 mkdir -p out
@@ -19,18 +20,11 @@ En Windows PowerShell:
 
 ```powershell
 New-Item -ItemType Directory -Force out | Out-Null
-$fuentes = Get-ChildItem -Recurse src -Filter *.java | ForEach-Object FullName
-javac -encoding UTF-8 -d out $fuentes
+Get-ChildItem -Recurse src -Filter *.java | ForEach-Object FullName | Set-Content fuentes.txt
+javac -encoding UTF-8 -d out '@fuentes.txt'
 java -cp out com.techlab.app.Main
+Remove-Item fuentes.txt
 ```
 
-También se puede abrir la carpeta en IntelliJ IDEA o VS Code y ejecutar `com.techlab.app.Main`.
-
-## Funcionalidades
-
-Menú para agregar, listar, buscar, actualizar y eliminar productos; crear y listar pedidos. Los pedidos validan el stock **acumulado** por producto antes de confirmar y solo entonces descuentan existencias. Los importes de cada línea quedan registrados al precio vigente al crear el pedido. Los datos se guardan **en memoria** (se reinician al cerrar). Incluye tres productos de ejemplo.
-
-## Organización
-
-`src/com/techlab/productos`: modelos y contrato de descuento. `pedidos`: pedidos y líneas. `servicios`: reglas de negocio. `excepciones`: errores propios. `app`: menú.
-
+## Uso
+El menú principal separa Productos, Categorías y Pedidos. Hay tres categorías y tres productos de ejemplo. No es posible eliminar una categoría que tenga productos asociados. Al confirmar pedidos se verifica el stock total por producto antes de descontarlo.
