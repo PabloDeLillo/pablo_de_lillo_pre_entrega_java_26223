@@ -1,27 +1,25 @@
 /**
- * Proyecto: TechLab - Sistema de gestión de productos y pedidos
+ * Proyecto: TechLab - Sistema de gestión de artículos, categorías y pedidos
  * Desarrollador: Pablo De Lillo
- *
- * Cada línea relaciona un producto con la cantidad pedida y su precio al momento de comprar.
  */
 package com.techlab.pedidos;
 
-import com.techlab.productos.Producto;
+import com.techlab.productos.Articulo;
 
 public class LineaPedido {
-    private final Producto producto;
+    private final Articulo articulo;
     private final int cantidad;
     private final double precioUnitario;
 
-    public LineaPedido(Producto producto, int cantidad) {
-        if (producto == null) throw new IllegalArgumentException("Producto inválido.");
+    public LineaPedido(Articulo articulo, int cantidad) {
+        if (articulo == null) throw new IllegalArgumentException("Artículo inválido.");
         if (cantidad <= 0) throw new IllegalArgumentException("La cantidad debe ser mayor a cero.");
-        this.producto = producto;
+        this.articulo = articulo;
         this.cantidad = cantidad;
-        this.precioUnitario = producto.getPrecio();
+        this.precioUnitario = articulo.getPrecio();
     }
 
-    public Producto getProducto() { return producto; }
+    public Articulo getArticulo() { return articulo; }
     public int getCantidad() { return cantidad; }
     public double getPrecioUnitario() { return precioUnitario; }
     public double calcularSubtotal() { return precioUnitario * cantidad; }
@@ -29,6 +27,6 @@ public class LineaPedido {
     @Override
     public String toString() {
         return String.format("%s x %d | $%.2f c/u | Subtotal: $%.2f",
-                producto.getNombre(), cantidad, precioUnitario, calcularSubtotal());
+                articulo.getNombre(), cantidad, precioUnitario, calcularSubtotal());
     }
 }

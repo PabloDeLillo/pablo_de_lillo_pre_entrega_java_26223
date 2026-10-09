@@ -1,15 +1,66 @@
-/** TechLab - Desarrollador: Pablo De Lillo. */
+/**
+ * Proyecto: TechLab - Sistema de gestión de artículos, categorías y pedidos
+ * Desarrollador: Pablo De Lillo
+ */
 package com.techlab.utilidades;
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
+
 import java.util.Scanner;
+
 public final class Validaciones {
- private Validaciones(){}
- public static String texto(Scanner sc,String mensaje){while(true){System.out.print(mensaje);if(!sc.hasNextLine())throw new IllegalStateException("Fin de entrada.");String s=sc.nextLine().trim();if(!s.isEmpty())return s;System.out.println("No puede estar vacío.");}}
- public static int entero(Scanner sc,String m){while(true){try{return Integer.parseInt(texto(sc,m));}catch(NumberFormatException e){System.out.println("Ingresá un entero válido.");}}}
- public static int noNegativo(Scanner sc,String m){while(true){int n=entero(sc,m);if(n>=0)return n;System.out.println("No puede ser negativo.");}}
- public static int positivo(Scanner sc,String m){while(true){int n=entero(sc,m);if(n>0)return n;System.out.println("Debe ser mayor que cero.");}}
- public static double decimal(Scanner sc,String m,boolean positivo){while(true){try{double d=Double.parseDouble(texto(sc,m).replace(',','.'));if(Double.isFinite(d)&&(positivo?d>0:d>=0))return d;}catch(NumberFormatException e){}System.out.println("Número inválido.");}}
- public static LocalDate fecha(Scanner sc,String m){while(true){try{return LocalDate.parse(texto(sc,m));}catch(DateTimeParseException e){System.out.println("Usá AAAA-MM-DD.");}}}
- public static boolean confirmar(Scanner sc,String m){return texto(sc,m).equalsIgnoreCase("S");}
+    private Validaciones() {}
+
+    public static String texto(Scanner sc, String mensaje) {
+        while (true) {
+            System.out.print(mensaje);
+            if (!sc.hasNextLine()) throw new IllegalStateException("Fin de entrada.");
+            String valor = sc.nextLine().trim();
+            if (!valor.isEmpty()) return valor;
+            System.out.println("No puede estar vacío.");
+        }
+    }
+
+    public static int entero(Scanner sc, String mensaje) {
+        while (true) {
+            try {
+                return Integer.parseInt(texto(sc, mensaje));
+            } catch (NumberFormatException e) {
+                System.out.println("Ingresá un entero válido.");
+            }
+        }
+    }
+
+    public static int noNegativo(Scanner sc, String mensaje) {
+        while (true) {
+            int numero = entero(sc, mensaje);
+            if (numero >= 0) return numero;
+            System.out.println("No puede ser negativo.");
+        }
+    }
+
+    public static int positivo(Scanner sc, String mensaje) {
+        while (true) {
+            int numero = entero(sc, mensaje);
+            if (numero > 0) return numero;
+            System.out.println("Debe ser mayor que cero.");
+        }
+    }
+
+    public static double decimal(Scanner sc, String mensaje, boolean positivo) {
+        while (true) {
+            try {
+                double numero = Double.parseDouble(texto(sc, mensaje).replace(',', '.'));
+                if (Double.isFinite(numero) && (positivo ? numero > 0 : numero >= 0)) return numero;
+            } catch (NumberFormatException ignored) { }
+            System.out.println("Número inválido.");
+        }
+    }
+
+    // Nombres alternativos para que las validaciones también sean fáciles de reconocer en la consigna.
+    public static int leerEnteroNoNegativo(Scanner sc, String mensaje) { return noNegativo(sc, mensaje); }
+    public static int leerEnteroPositivo(Scanner sc, String mensaje) { return positivo(sc, mensaje); }
+    public static double leerDecimalNoNegativo(Scanner sc, String mensaje) { return decimal(sc, mensaje, false); }
+
+    public static boolean confirmar(Scanner sc, String mensaje) {
+        return texto(sc, mensaje).equalsIgnoreCase("S");
+    }
 }

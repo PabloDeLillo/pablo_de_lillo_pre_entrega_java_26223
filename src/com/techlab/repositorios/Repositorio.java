@@ -1,12 +1,40 @@
-/** TechLab - Desarrollador: Pablo De Lillo. */
+/**
+ * Proyecto: TechLab - Sistema de gestión de artículos, categorías y pedidos
+ * Desarrollador: Pablo De Lillo
+ *
+ * Repositorio genérico en memoria. Uso ArrayList para mantener el contenido visto en clase.
+ */
 package com.techlab.repositorios;
+
 import com.techlab.interfaces.Identificable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
+
 public class Repositorio<T extends Identificable> {
- private final Map<Integer,T> datos=new LinkedHashMap<>();
- public void guardar(T elemento) {if(elemento==null)throw new IllegalArgumentException("Elemento nulo.");datos.put(elemento.getId(),elemento);}
- public Optional<T> buscar(int id){return Optional.ofNullable(datos.get(id));}
- public List<T> listar(){return Collections.unmodifiableList(new ArrayList<>(datos.values()));}
- public boolean eliminar(int id){return datos.remove(id)!=null;}
- public boolean existe(int id){return datos.containsKey(id);}
+    private final ArrayList<T> datos = new ArrayList<>();
+
+    public void guardar(T elemento) {
+        if (elemento == null) throw new IllegalArgumentException("Elemento nulo.");
+        if (existe(elemento.getId())) throw new IllegalArgumentException("Ya existe un elemento con ID/código " + elemento.getId() + ".");
+        datos.add(elemento);
+    }
+
+    public Optional<T> buscar(int id) {
+        for (T elemento : datos) if (elemento.getId() == id) return Optional.of(elemento);
+        return Optional.empty();
+    }
+
+    public List<T> listar() {
+        return Collections.unmodifiableList(new ArrayList<>(datos));
+    }
+
+    public boolean eliminar(int id) {
+        return datos.removeIf(elemento -> elemento.getId() == id);
+    }
+
+    public boolean existe(int id) {
+        return buscar(id).isPresent();
+    }
 }
