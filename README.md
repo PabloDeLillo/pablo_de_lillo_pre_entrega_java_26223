@@ -2,26 +2,7 @@
 
 **Desarrollador:** Pablo De Lillo
 
-Aplicación de consola desarrollada en Java para practicar Programación Orientada a Objetos. El proyecto administra artículos/productos, categorías y pedidos, con validaciones de datos y control de stock.
-
-## Funcionalidades
-
-- Clase abstracta `Articulo` con datos comunes a todos los artículos.
-- Subtipos `ArticuloElectronico` y `ArticuloAlimenticio`.
-- Métodos polimórficos `getTipoArticulo()` y `getDetalleEspecifico()`.
-- Artículos electrónicos con `garantiaMeses` y `nroTelMesaDeAyudaParaReclamos()`.
-- Artículos alimenticios con `diasParaVencimiento`.
-- Alta de artículos con código ingresado por el usuario y control de códigos duplicados.
-- Búsqueda, modificación y eliminación de artículos.
-- Modificación de datos específicos mediante `instanceof` y casting.
-- CRUD completo de categorías.
-- Categorías iniciales: Electrónica, Periféricos, Alimentos y Limpieza.
-- Interfaces `Identificable` y `Calculable`.
-- Repositorio genérico `Repositorio<T>` implementado en memoria con `ArrayList`.
-- Menús separados para artículos, categorías y pedidos.
-- Clases auxiliares `Validaciones` y `Secuencias`.
-- Pedidos con varias líneas y control de stock antes de confirmar la compra.
-- El stock se descuenta solamente cuando el pedido completo puede realizarse.
+Aplicación de consola desarrollada en Java 
 
 ## Requisitos
 
